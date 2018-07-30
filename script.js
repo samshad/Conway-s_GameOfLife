@@ -23,6 +23,8 @@ function init() {
         btn.style.color = "#b9c7f1";
         btn.textContent = '.';
         btn.addEventListener("click", initPopulation);
+        btn.addEventListener("mouseover", mouseOver);
+        btn.addEventListener("mouseout", mouseOut);
         document.getElementById("btn-div").appendChild(btn);
 
         isClicked[row].push(0);
@@ -82,7 +84,7 @@ function start() {
     year++;
     document.getElementById("year").innerText = year;
     var ki = hoiseNaki();
-    if(ki === "hoise") setTimeout(function(){ start(); }, 1000);
+    if(ki === "hoise") setTimeout(function(){ start(); }, 750);
     else if(ki === "loop"){
         year--;
         document.getElementById("running").innerText = "Deadlock Year: ";
@@ -166,4 +168,16 @@ function hoiseNaki() {
 
 function isValid(a, b) {
     return a >= 0 && a < 15 && b >= 0 && b < 17;
+}
+
+function mouseOver() {
+    if(this.textContent === '.'){
+        this.style.color = "#7183ff";
+    }
+}
+
+function mouseOut() {
+    if(this.textContent === '.'){
+        this.style.color = "#b9c7f1";
+    }
 }
