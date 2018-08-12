@@ -8,9 +8,9 @@ window.onload = function () {
 }
 
 function printScore() {
-    document.getElementById("one").textContent = "  " + score[0].toString();
-    document.getElementById("two").textContent = "  " + score[1].toString();
-    document.getElementById("three").textContent = "  " + score[2].toString();
+    document.getElementById("one").textContent = score[0].toString();
+    document.getElementById("two").textContent = score[1].toString();
+    document.getElementById("three").textContent = score[2].toString();
 }
 
 function init() {
