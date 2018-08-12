@@ -1,8 +1,17 @@
 var isClicked, tmp, year, loop, nibo;
 var dx = [-1, 1, 0, 0, -1, -1, 1, 1];
 var dy = [0, 0, 1, -1, -1, 1, -1, 1];
+var score = [0,0,0], tmpS = [0,0,0,0];
 
-init();
+window.onload = function () {
+    init();
+}
+
+function printScore() {
+    document.getElementById("one").textContent = "  " + score[0].toString();
+    document.getElementById("two").textContent = "  " + score[1].toString();
+    document.getElementById("three").textContent = "  " + score[2].toString();
+}
 
 function init() {
     var row = 0, col = 0;
@@ -36,6 +45,7 @@ function init() {
             col = 0;
         }
     }
+    printScore();
 }
 
 function initPopulation() {
@@ -48,8 +58,20 @@ function initPopulation() {
     document.getElementById(id).textContent = 'X';
 }
 
+function genGrid() {
+    var myNode = document.getElementById("btn-div");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+    init();
+    document.getElementById("start").style.display = "inline";
+    document.getElementById("running").style.display = "none";
+    document.getElementById("year").style.display = "none";
+}
+
 function reset() {
-    location.reload();
+    genGrid();
+    //location.reload();
 }
 
 function check() {
@@ -80,6 +102,19 @@ function bobaBanai() {
     }
 }
 
+function updateScore() {
+    for(var i = 0; i < 3; i++){
+        tmpS[i] = score[i];
+    }
+
+    tmpS[3] = parseInt(year);
+    tmpS.sort(function(a, b){return b - a});
+
+    for(var i = 0; i < 3; i++){
+        score[i] = tmpS[i];
+    }
+}
+
 function start() {
     year++;
     document.getElementById("year").innerText = year;
@@ -89,11 +124,13 @@ function start() {
         year--;
         document.getElementById("running").innerText = "Deadlock Year: ";
         document.getElementById("year").innerText = year;
+        updateScore();
     }
     else{
         year--;
         document.getElementById("running").innerText = "Survived Year: ";
         document.getElementById("year").innerText = year;
+        updateScore();
     }
 }
 
