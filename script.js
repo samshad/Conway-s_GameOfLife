@@ -55,7 +55,7 @@ function initPopulation() {
     var y = str[2];
     isClicked[x][y] = 1;
     document.getElementById(id).style.color = "black";
-    document.getElementById(id).textContent = 'X';
+    document.getElementById(id).textContent = '\326';
 }
 
 function genGrid() {
@@ -134,6 +134,12 @@ function start() {
     }
 }
 
+function mairaFeli(id) {
+    document.getElementById(id).style.color = "#b9c7f1";
+    document.getElementById(id).textContent = '.';
+    //console.log(id);
+}
+
 function hoiseNaki() {
     for(var i = 0; i < 15; i++){
         for(var j = 0; j < 17; j++){
@@ -163,13 +169,17 @@ function hoiseNaki() {
     for(var i = 0; i < 15; i++){
         for(var j = 0; j < 17; j++){
             var id = "btn-" + i + "-" + j;
+            var hayre = isClicked[i][j];
             if(isClicked[i][j] !== tmp[i][j]) hoise = "hoise";
             isClicked[i][j] = tmp[i][j];
             if(isClicked[i][j] === 1){
                 document.getElementById(id).style.color = "black";
-                document.getElementById(id).textContent = 'X';
+                document.getElementById(id).textContent = '\326';
             }
-            else{
+            else if(hayre === 1){
+                //document.getElementById(id).style.color = "#8c8b90";
+                //document.getElementById(id).textContent = '\326';
+                //setTimeout(function(){ mairaFeli(id); }, 2500);
                 document.getElementById(id).style.color = "#b9c7f1";
                 document.getElementById(id).textContent = '.';
             }
