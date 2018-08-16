@@ -155,7 +155,6 @@ function start() {
             document.getElementById("running").innerText = "Survived Year: ";
             document.getElementById("year").innerText = year;
         }
-        console.log("dhuksi");
     }
 }
 

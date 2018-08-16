@@ -1,32 +1,29 @@
 <html>
 <head>
     <title>Game Of Life</title>
-    <link type="text/css" rel="stylesheet" href="style.css">
+    <link type="text/css" rel="stylesheet" href="home.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <noscript>
         <META HTTP-EQUIV="Refresh" CONTENT="0;URL=noJS.html">
     </noscript>
 </head>
 <body>
-    <div class="wrapper">
-        <div class="heading">Conway's Game of Life</div>
-        <div class="middle" id="middle">
-            <div class="btn-div" id="btn-div">
-                <script src="script.js"></script>
-            </div>
-            <div id="headScore">High Scores:</div>
-            <div id="list">
-                <div class="number">1.</div><div class="number" id="one"></div><br>
-                <div class="number">2.</div><div class="number" id="two"></div><br>
-                <div class="number">3.</div><div class="number" id="three"></div><br>
-            </div>
-        </div>
-        <div class="btn-submit">
-            <span id="running">Running Year: </span>
-            <span id="year"></span>
-            <button class="btns" id="start" onclick="check()">Let the game begin</button>
-            <button class="btns" id="reset" onclick="reset()">Reset</button>
-        </div>
+<div class="wrapper">
+    <div class="heading">Conway's Game of Life</div>
+    <div class="middle" id="middle">
+        <div id="headScore">Rules:</div>
+        <ul id="list">
+            <li class="rules">Any live cell with fewer than two live neighbors dies, as if caused by under population.</li>
+            <li class="rules">Any live cell with two or three live neighbors lives on to the next generation.</li>
+            <li class="rules">Any live cell with more than three live neighbors dies, as if by overpopulation.</li>
+            <li class="rules">Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.</li>
+        </ul>
     </div>
+    <div class="btn-submit">
+        <form action="game.html">
+            <button type="submit" class="btns" id="start">Lets Play</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
