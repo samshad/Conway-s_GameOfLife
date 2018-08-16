@@ -3,6 +3,7 @@ var dx = [-1, 1, 0, 0, -1, -1, 1, 1];
 var dy = [0, 0, 1, -1, -1, 1, -1, 1];
 var score = [0,0,0], tmpS = [0,0,0,0];
 var isKeyDown = "no", prothom = "no";
+var dan = 30, niche = 30;
 
 window.onload = function () {
     init();
@@ -31,11 +32,11 @@ function init() {
     prothom = "no";
     shesh = "no";
 
-    for(var i = 0; i < 15; i++) isClicked[i] = [];
-    for(var i = 0; i < 15; i++) tmp[i] = [];
-    for(var i = 0; i < 15; i++) loop[i] = [];
+    for(var i = 0; i < dan; i++) isClicked[i] = [];
+    for(var i = 0; i < dan; i++) tmp[i] = [];
+    for(var i = 0; i < dan; i++) loop[i] = [];
 
-    for(var i = 0; i < (15*17); i++){
+    for(var i = 0; i < (dan*niche); i++){
         var btn = document.createElement("button");
         btn.className = "btn";
         btn.id = "btn-" + row + "-" + col;
@@ -52,7 +53,7 @@ function init() {
         tmp[row].push(0);
         loop[row].push(0);
         col++;
-        if(col >= 17){
+        if(col >= niche){
             row++;
             col = 0;
         }
@@ -91,6 +92,7 @@ function genGrid() {
     }
     init();
     document.getElementById("start").style.display = "inline";
+    document.getElementById("running").innerText = "Running Year: ";
     document.getElementById("running").style.display = "none";
     document.getElementById("year").style.display = "none";
 }
@@ -103,8 +105,8 @@ function reset() {
 
 function check() {
     var f = "nai";
-    for(var i = 0; i < 15; i++){
-        for(var j = 0; j < 17; j++){
+    for(var i = 0; i < dan; i++){
+        for(var j = 0; j < niche; j++){
             if(isClicked[i][j] === 1) f = "paisi";
         }
     }
@@ -120,8 +122,8 @@ function check() {
 }
 
 function bobaBanai() {
-    for(var i = 0; i < 15; i++){
-        for(var j = 0; j < 17; j++){
+    for(var i = 0; i < dan; i++){
+        for(var j = 0; j < niche; j++){
             var id = "btn-" + i + "-" + j;
             var x = document.getElementById(id);
             x.removeEventListener("click", initPopulation);
@@ -147,31 +149,22 @@ function start() {
     document.getElementById("year").innerText = year;
     var ki = hoiseNaki();
     if(ki === "hoise") setTimeout(function(){ start(); }, 750);
-    else if(ki === "loop"){
-        year--;
-        document.getElementById("running").innerText = "Deadlock Year: ";
-        document.getElementById("year").innerText = year;
-        updateScore();
-        shesh = "yes";
-    }
     else{
         year--;
         document.getElementById("running").innerText = "Survived Year: ";
         document.getElementById("year").innerText = year;
-        updateScore();
-        shesh = "yes";
     }
 }
 
 function hoiseNaki() {
-    for(var i = 0; i < 15; i++){
-        for(var j = 0; j < 17; j++){
+    for(var i = 0; i < dan; i++){
+        for(var j = 0; j < niche; j++){
             tmp[i][j] = 0;
         }
     }
 
-    for(var i = 0; i < 15; i++){
-        for(var j = 0; j < 17; j++){
+    for(var i = 0; i < dan; i++){
+        for(var j = 0; j < niche; j++){
             var cnt = 0;
             for(var l = 0; l < 8; l++){
                 var x = i + dx[l];
@@ -189,8 +182,8 @@ function hoiseNaki() {
 
     var hoise = "na";
 
-    for(var i = 0; i < 15; i++){
-        for(var j = 0; j < 17; j++){
+    for(var i = 0; i < dan; i++){
+        for(var j = 0; j < niche; j++){
             var id = "btn-" + i + "-" + j;
             if(isClicked[i][j] !== tmp[i][j]) hoise = "hoise";
             isClicked[i][j] = tmp[i][j];
@@ -207,8 +200,8 @@ function hoiseNaki() {
 
     if(hoise === "hoise" && year > 2){
         var same = "ho";
-        for(var i = 0; i < 15; i++) {
-            for (var j = 0; j < 17; j++) {
+        for(var i = 0; i < dan; i++) {
+            for (var j = 0; j < niche; j++) {
                 if (loop[i][j] !== tmp[i][j]) {
                     same = "na";
                     break;
@@ -216,13 +209,13 @@ function hoiseNaki() {
             }
             if(same === "na") break;
         }
-        if(same === "ho") return "loop";
+        if(same === "ho") document.getElementById("running").innerText = "Deadlock: ";
     }
 
     if(nibo === "yes"){
         nibo = "no";
-        for(var i = 0; i < 15; i++){
-            for(var j = 0; j < 17; j++){
+        for(var i = 0; i < dan; i++){
+            for(var j = 0; j < niche; j++){
                 loop[i][j] = tmp[i][j];
             }
         }
@@ -233,7 +226,7 @@ function hoiseNaki() {
 }
 
 function isValid(a, b) {
-    return a >= 0 && a < 15 && b >= 0 && b < 17;
+    return a >= 0 && a < dan && b >= 0 && b < niche;
 }
 
 function mouseOver() {

@@ -4,15 +4,14 @@ body {
     background-position: center;
     font-weight: 300;
     position: relative;
-    height: 100vh;
+    height: 1200px;
     color: #555;
 }
 
 .wrapper {
     border-radius: 10px;
-    width: 840px;
-    height: 640px;
-    position: absolute;
+    width: 1300px;
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -48,8 +47,8 @@ button:hover {
 }
 
 #btn-div {
-    width: 580px;
-    margin: 5px 30px 5px 80px;
+    width: 1050px;
+    margin: 5px 25px 5px 80px;
     padding: 2px;
     float: left;
 }
@@ -76,7 +75,7 @@ button:hover {
     float: left;
     font-family: 'Roboto', sans-serif;
     display: inline-block;
-    font-size: 16px;
+    font-size: 18px;
     margin: 10px 5px;
     text-transform: uppercase;
     font-weight: 900;
