@@ -1,10 +1,17 @@
-var isClicked, tmp, year, loop, nibo;
+var isClicked, tmp, year, loop, nibo, shesh;
 var dx = [-1, 1, 0, 0, -1, -1, 1, 1];
 var dy = [0, 0, 1, -1, -1, 1, -1, 1];
 var score = [0,0,0], tmpS = [0,0,0,0];
+var isKeyDown = "no", prothom = "no";
 
 window.onload = function () {
     init();
+}
+
+window.onmouseup = function() {
+    isKeyDown = "no";
+    prothom = "no";
+    //console.log(isKeyDown);
 }
 
 function printScore() {
@@ -20,6 +27,9 @@ function init() {
     loop = [];
     nibo = "yes";
     year = 0;
+    isKeyDown = "no";
+    prothom = "no";
+    shesh = "no";
 
     for(var i = 0; i < 15; i++) isClicked[i] = [];
     for(var i = 0; i < 15; i++) tmp[i] = [];
@@ -34,6 +44,8 @@ function init() {
         btn.addEventListener("click", initPopulation);
         btn.addEventListener("mouseover", mouseOver);
         btn.addEventListener("mouseout", mouseOut);
+        btn.addEventListener("mousedown", down);
+        //btn.addEventListener("mouseup", up);
         document.getElementById("btn-div").appendChild(btn);
 
         isClicked[row].push(0);
@@ -49,13 +61,27 @@ function init() {
 }
 
 function initPopulation() {
-    var id = this.id;
-    var str = id.split("-");
-    var x = str[1];
-    var y = str[2];
-    isClicked[x][y] = 1;
-    document.getElementById(id).style.color = "black";
-    document.getElementById(id).textContent = '\326';
+    if(this.textContent === '.'){
+        var id = this.id;
+        var str = id.split("-");
+        var x = str[1];
+        var y = str[2];
+        isClicked[x][y] = 1;
+        document.getElementById(id).style.color = "black";
+        document.getElementById(id).textContent = '\326';
+        prothom = "no"
+    }
+
+    else if(this.textContent === '\326'){
+        var id = this.id;
+        var str = id.split("-");
+        var x = str[1];
+        var y = str[2];
+        isClicked[x][y] = 0;
+        this.style.color = "#7183ff";
+        this.textContent = '.';
+        prothom = "no"
+    }
 }
 
 function genGrid() {
@@ -70,6 +96,7 @@ function genGrid() {
 }
 
 function reset() {
+    if(shesh === "no") updateScore();
     genGrid();
     //location.reload();
 }
@@ -125,19 +152,15 @@ function start() {
         document.getElementById("running").innerText = "Deadlock Year: ";
         document.getElementById("year").innerText = year;
         updateScore();
+        shesh = "yes";
     }
     else{
         year--;
         document.getElementById("running").innerText = "Survived Year: ";
         document.getElementById("year").innerText = year;
         updateScore();
+        shesh = "yes";
     }
-}
-
-function mairaFeli(id) {
-    document.getElementById(id).style.color = "#b9c7f1";
-    document.getElementById(id).textContent = '.';
-    //console.log(id);
 }
 
 function hoiseNaki() {
@@ -169,17 +192,13 @@ function hoiseNaki() {
     for(var i = 0; i < 15; i++){
         for(var j = 0; j < 17; j++){
             var id = "btn-" + i + "-" + j;
-            var hayre = isClicked[i][j];
             if(isClicked[i][j] !== tmp[i][j]) hoise = "hoise";
             isClicked[i][j] = tmp[i][j];
             if(isClicked[i][j] === 1){
                 document.getElementById(id).style.color = "black";
                 document.getElementById(id).textContent = '\326';
             }
-            else if(hayre === 1){
-                //document.getElementById(id).style.color = "#8c8b90";
-                //document.getElementById(id).textContent = '\326';
-                //setTimeout(function(){ mairaFeli(id); }, 2500);
+            else{
                 document.getElementById(id).style.color = "#b9c7f1";
                 document.getElementById(id).textContent = '.';
             }
@@ -195,7 +214,7 @@ function hoiseNaki() {
                     break;
                 }
             }
-            if (same === "na") break;
+            if(same === "na") break;
         }
         if(same === "ho") return "loop";
     }
@@ -218,13 +237,57 @@ function isValid(a, b) {
 }
 
 function mouseOver() {
-    if(this.textContent === '.'){
+    if(this.textContent === '.' && isKeyDown === "no"){
         this.style.color = "#7183ff";
+    }
+
+    else if(this.textContent === '.' && isKeyDown === "yes"){
+        var id = this.id;
+        var str = id.split("-");
+        var x = str[1];
+        var y = str[2];
+        isClicked[x][y] = 1;
+        this.style.color = "black";
+        this.textContent = '\326';
+    }
+
+    else if(this.textContent === '\326' && isKeyDown === "yes"){
+        var id = this.id;
+        var str = id.split("-");
+        var x = str[1];
+        var y = str[2];
+        isClicked[x][y] = 0;
+        this.style.color = "#b9c7f1";
+        this.textContent = '.';
     }
 }
 
 function mouseOut() {
-    if(this.textContent === '.'){
+    if(this.textContent === '.' && isKeyDown === "no"){
         this.style.color = "#b9c7f1";
     }
+
+    else if(prothom === "yes" && this.textContent === '.'){
+        prothom = "no";
+        var id = this.id;
+        var str = id.split("-");
+        var x = str[1];
+        var y = str[2];
+        isClicked[x][y] = 1;
+        this.style.color = "black";
+        this.textContent = '\326';
+    }
 }
+
+function down() {
+    isKeyDown = "yes";
+    prothom = "yes";
+
+    //console.log(isKeyDown);
+}
+
+/*function up() {
+    isKeyDown = "no";
+    prothom = "no";
+    console.log(isKeyDown);
+}*/
