@@ -151,8 +151,11 @@ function start() {
     if(ki === "hoise") setTimeout(function(){ start(); }, 750);
     else{
         year--;
-        document.getElementById("running").innerText = "Survived Year: ";
-        document.getElementById("year").innerText = year;
+        if(year > 0) {
+            document.getElementById("running").innerText = "Survived Year: ";
+            document.getElementById("year").innerText = year;
+        }
+        console.log("dhuksi");
     }
 }
 
