@@ -3,7 +3,7 @@ var dx = [-1, 1, 0, 0, -1, -1, 1, 1];
 var dy = [0, 0, 1, -1, -1, 1, -1, 1];
 var score = [0,0,0], tmpS = [0,0,0,0];
 var isKeyDown = "no", prothom = "no";
-var dan = 30, niche = 30;
+var dan = 59, niche = 59;
 
 window.onload = function () {
     init();
@@ -12,7 +12,6 @@ window.onload = function () {
 window.onmouseup = function() {
     isKeyDown = "no";
     prothom = "no";
-    //console.log(isKeyDown);
 }
 
 function printScore() {
@@ -40,8 +39,7 @@ function init() {
         var btn = document.createElement("button");
         btn.className = "btn";
         btn.id = "btn-" + row + "-" + col;
-        btn.style.color = "#b9c7f1";
-        btn.textContent = '.';
+        btn.style.backgroundColor = "#b9c7f1";
         btn.addEventListener("click", initPopulation);
         btn.addEventListener("mouseover", mouseOver);
         btn.addEventListener("mouseout", mouseOut);
@@ -62,25 +60,19 @@ function init() {
 }
 
 function initPopulation() {
-    if(this.textContent === '.'){
-        var id = this.id;
-        var str = id.split("-");
-        var x = str[1];
-        var y = str[2];
+    var id = this.id;
+    var str = id.split("-");
+    var x = str[1];
+    var y = str[2];
+    if(isClicked[x][y] === 0){
         isClicked[x][y] = 1;
-        document.getElementById(id).style.color = "black";
-        document.getElementById(id).textContent = '\326';
+        this.style.backgroundColor = "#383a3f";
         prothom = "no"
     }
 
-    else if(this.textContent === '\326'){
-        var id = this.id;
-        var str = id.split("-");
-        var x = str[1];
-        var y = str[2];
+    else if(isClicked[x][y] === 1){
         isClicked[x][y] = 0;
-        this.style.color = "#7183ff";
-        this.textContent = '.';
+        this.style.backgroundColor = "#b9c7f1";
         prothom = "no"
     }
 }
@@ -100,7 +92,6 @@ function genGrid() {
 function reset() {
     if(shesh === "no") updateScore();
     genGrid();
-    //location.reload();
 }
 
 function check() {
@@ -190,12 +181,10 @@ function hoiseNaki() {
             if(isClicked[i][j] !== tmp[i][j]) hoise = "hoise";
             isClicked[i][j] = tmp[i][j];
             if(isClicked[i][j] === 1){
-                document.getElementById(id).style.color = "black";
-                document.getElementById(id).textContent = '\326';
+                document.getElementById(id).style.backgroundColor = "#383a3f";
             }
             else{
-                document.getElementById(id).style.color = "#b9c7f1";
-                document.getElementById(id).textContent = '.';
+                document.getElementById(id).style.backgroundColor = "#b9c7f1";
             }
         }
     }
@@ -232,57 +221,44 @@ function isValid(a, b) {
 }
 
 function mouseOver() {
-    if(this.textContent === '.' && isKeyDown === "no"){
-        this.style.color = "#7183ff";
+    var id = this.id;
+    var str = id.split("-");
+    var x = str[1];
+    var y = str[2];
+
+    if(isClicked[x][y] === 0 && isKeyDown === "no"){
+        this.style.backgroundColor = "#7183ff";
     }
 
-    else if(this.textContent === '.' && isKeyDown === "yes"){
-        var id = this.id;
-        var str = id.split("-");
-        var x = str[1];
-        var y = str[2];
+    else if(isClicked[x][y] === 0 && isKeyDown === "yes"){
         isClicked[x][y] = 1;
-        this.style.color = "black";
-        this.textContent = '\326';
+        this.style.backgroundColor = "#383a3f";
     }
 
-    else if(this.textContent === '\326' && isKeyDown === "yes"){
-        var id = this.id;
-        var str = id.split("-");
-        var x = str[1];
-        var y = str[2];
+    else if(isClicked[x][y] === 1 && isKeyDown === "yes"){
         isClicked[x][y] = 0;
-        this.style.color = "#b9c7f1";
-        this.textContent = '.';
+        this.style.backgroundColor = "#b9c7f1";
     }
 }
 
 function mouseOut() {
-    if(this.textContent === '.' && isKeyDown === "no"){
-        this.style.color = "#b9c7f1";
+    var id = this.id;
+    var str = id.split("-");
+    var x = str[1];
+    var y = str[2];
+
+    if(isClicked[x][y] === 0 && isKeyDown === "no"){
+        this.style.backgroundColor = "#b9c7f1";
     }
 
-    else if(prothom === "yes" && this.textContent === '.'){
+    else if(prothom === "yes" && isClicked[x][y] === 0){
         prothom = "no";
-        var id = this.id;
-        var str = id.split("-");
-        var x = str[1];
-        var y = str[2];
         isClicked[x][y] = 1;
-        this.style.color = "black";
-        this.textContent = '\326';
+        this.style.backgroundColor = "#383a3f";
     }
 }
 
 function down() {
     isKeyDown = "yes";
     prothom = "yes";
-
-    //console.log(isKeyDown);
 }
-
-/*function up() {
-    isKeyDown = "no";
-    prothom = "no";
-    console.log(isKeyDown);
-}*/
