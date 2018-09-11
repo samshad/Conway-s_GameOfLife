@@ -4,6 +4,7 @@ var dy = [0, 0, 1, -1, -1, 1, -1, 1];
 var score = [0,0,0], tmpS = [0,0,0,0];
 var isKeyDown = "no", prothom = "no";
 var dan = 59, niche = 59;
+var speed = 750;
 
 window.onload = function () {
     init();
@@ -18,6 +19,12 @@ function printScore() {
     document.getElementById("one").textContent = score[0].toString();
     document.getElementById("two").textContent = score[1].toString();
     document.getElementById("three").textContent = score[2].toString();
+}
+
+function chq(id) {
+    if(id === 'slow') speed = 1200;
+    else if(id === 'normal') speed = 750;
+    else speed = 400;
 }
 
 function init() {
@@ -107,6 +114,7 @@ function check() {
         document.getElementById("running").style.display = "inline";
         document.getElementById("year").style.display = "inline";
         document.getElementById("year").innerText = year;
+        document.getElementById("radio").style.display = "";
         bobaBanai();
         start();
     }
@@ -139,7 +147,7 @@ function start() {
     year++;
     document.getElementById("year").innerText = year;
     var ki = hoiseNaki();
-    if(ki === "hoise") setTimeout(function(){ start(); }, 750);
+    if(ki === "hoise") setTimeout(function(){ start(); }, speed);
     else{
         year--;
         if(year > 0) {

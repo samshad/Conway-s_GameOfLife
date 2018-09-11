@@ -88,6 +88,30 @@ button:hover {
     text-align: left;
 }
 
+#radio{
+    float: left;
+    font-family: 'Roboto', sans-serif;
+    display: inline-block;
+    font-size: 14px;
+    margin: 200px 5px 0px -95px;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: black;
+    text-align: left;
+}
+
+#radio_text{
+    float: left;
+    font-family: 'Roboto', sans-serif;
+    display: inline-block;
+    font-size: 14px;
+    margin: -25px 0px 0px 70px;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: black;
+    text-align: left;
+}
+
 .heading {
     font-family: 'Roboto', sans-serif;
     display: block;
@@ -127,7 +151,7 @@ button:hover {
 
 .btn-submit {
     text-align: center;
-    margin: 10px;
+    margin: 320px 30px 0px 0px;
     padding: 2px 5px;
 }
 
@@ -143,7 +167,8 @@ button:hover {
 
 #start {
     border-color: #f44336;
-    color: red
+    color: red;
+    width: 70px;
 }
 
 #start:hover {
@@ -164,6 +189,8 @@ button:hover {
 #reset {
     border-color: #2196F3;
     color: dodgerblue;
+    width: 70px;
+
 }
 
 #reset:hover {
@@ -173,25 +200,27 @@ button:hover {
 
 .btns:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+
 }
 
 #running {
     font-family: 'Roboto', sans-serif;
     display: none;
-    font-size: 16px;
+    font-size: 14px;
     text-transform: uppercase;
     font-weight: 900;
     color: #EB4D4D;
     text-align: center;
+    margin: 10px 30px 0px -5px;
 }
 
 #year {
     font-family: 'Roboto', sans-serif;
     display: none;
-    font-size: 25px;
+    font-size: 20px;
     text-transform: uppercase;
     font-weight: 900;
     color: #EB4D4D;
-    text-align: center;
-    margin: 0px 5px;
+    text-align: right;
+    margin: -30px 0px 0px 0px;
 }
