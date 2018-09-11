@@ -1,7 +1,4 @@
 body {
-    /*background-image: linear-gradient(rgba(62, 20, 20, 0.4), rgba(62, 20, 20, 0.4)), url(back.jpg);
-    background-size: cover;
-    background-position: center;*/
     text-align: center;
     background-color: #626766;
     font-weight: 300;
@@ -190,7 +187,6 @@ button:hover {
     border-color: #2196F3;
     color: dodgerblue;
     width: 70px;
-
 }
 
 #reset:hover {
@@ -200,7 +196,6 @@ button:hover {
 
 .btns:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-
 }
 
 #running {
